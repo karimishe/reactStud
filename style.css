@@ -19,6 +19,7 @@ body {
 }
 
 .note {
+    position: relative;
     width: 400px;
     height: auto;
     background-color: yellow;
@@ -39,14 +40,14 @@ body {
 
 .delete-note {
     position: absolute;
-    top:5px;
-    right:5px;
+    bottom: 10px;
+    right: 5px;
     display: none;
     color: rgba(0,0,0,0.6);
     cursor: pointer;
 }
 
-.note:hover .delete-note {
+.note:hover .delete-note{
     display: block;
 }
 

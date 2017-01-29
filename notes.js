@@ -2,7 +2,10 @@ var Note = React.createClass({
     render: function() {
         var style = {backgroundColor: this.props.color};
         return (
-            <div className="note" style={style}>  {this.props.children} </div>
+            <div className="note" style={style}>
+                {this.props.children}
+                <span className="delete-note" onClick={this.props.onDelete}> × </span>
+            </div>
         );
     }
 });
@@ -40,7 +43,6 @@ var NoteEditor = React.createClass({
                     onChange={this.handleTextChange}
                 />
                 <button className="add-button" onClick={this.handleNoteAdd}>Add</button>
-
             </div>
         );
     }
@@ -49,6 +51,8 @@ var NoteEditor = React.createClass({
 var NotesGrid = React.createClass({
 
     render: function() {
+        var onNoteDelete = this.props.onNoteDelete;
+
         return (
             <div className="notes-grid" >
                 {
@@ -56,8 +60,9 @@ var NotesGrid = React.createClass({
                         return (
                             <Note
                                 key={note.id}
+                                onDelete={onNoteDelete.bind(null, note)}
                                 color={note.color}>
-                                    {note.text}
+                                {note.text}
                             </Note>
                         );
                     })
@@ -70,44 +75,7 @@ var NotesGrid = React.createClass({
 var NotesApp = React.createClass({
     getInitialState: function() {
         return {
-            notes: [
-                {
-                    id: 1,
-                    text: "Задача №1",
-                    color: "green"
-                },
-                {
-                    id: 2,
-                    text: "Задача №2 adsfasdf asd dasf asdf dasfasdasdf dasf asdf ",
-                    color: "green"
-                },
-                {
-                    id: 3,
-                    text: "Задача №3 dsafasdfasdf dasf asdf asdf asdfasdfasd sadf ",
-                    color: "gray"
-                },
-                {
-                    id: 4,
-                    text: "Задача №4 sdafasdfasdf asdf asdf asdfasdfasd fasd fasdf asdf asdf asdf",
-                    color: "red"
-                },
-                {
-                    id: 5,
-                    text: "Задача №5",
-                    color: "red"
-                },
-                {
-                    id: 6,
-                    text: "Задача №6",
-                    color: "yellow"
-                },
-                {
-                    id: 7,
-                    text: "Задача №7",
-                    color: "cian"
-                }
-
-            ]
+            notes: []
         };
     },
 
@@ -118,10 +86,22 @@ var NotesApp = React.createClass({
         }
     },
 
+    componentDidUpdate: function() {
+        this._updateLocalStorage();
+    },
+
     handleNoteAdd: function(newNote) {
         var newNotes = this.state.notes.slice();
         newNotes.unshift(newNote);
-        this.setState({ notes: newNotes },  this._updateLocalStorage);
+        this.setState({ notes: newNotes });
+    },
+
+    handleNoteDelete: function(note) {
+        var noteId = note.id;
+        var newNotes = this.state.notes.filter(function(note) {
+            return note.id !== noteId;
+        });
+        this.setState({ notes: newNotes });
     },
 
     render: function() {
@@ -129,7 +109,7 @@ var NotesApp = React.createClass({
             <div className="notes-app">
                 <h2 className="app-header"></h2>
                 <NoteEditor onNoteAdd={this.handleNoteAdd} />
-                <NotesGrid notes={this.state.notes} />
+                <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete} />
             </div>
         );
     },
