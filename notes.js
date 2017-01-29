@@ -8,6 +8,16 @@ var Note = React.createClass({
 });
 
 var NoteEditor = React.createClass({
+    getInitialState: function() {
+        return {
+            text: ''
+        };
+    },
+    
+    handleTextChange: function(event) {
+        this.setState({ text: event.target.value });
+    },
+
     render: function() {
         return (  
             <div className="note-editor">
@@ -15,6 +25,8 @@ var NoteEditor = React.createClass({
                     placeholder="Enter your note here..."
                     rows={5}
                     className="textarea"
+                    value={this.state.text}
+                    onChange={this.handleTextChange}
                 />
                 <button className="add-button">Add</button>
 
