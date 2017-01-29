@@ -1,7 +1,8 @@
 var Note = React.createClass({
     render: function() {
+        var style = {backgroundColor: this.props.color};
         return (
-            <div className="note">  {this.props.children} </div>
+            <div className="note" style={style}>  {this.props.children} </div>
         );
     }
 });
@@ -15,9 +16,18 @@ var NoteEditor = React.createClass({
 });
 
 var NotesGrid = React.createClass({
+    componentDidMount: function() {
+        var grid = this.refs.grid;
+        this.msnry = new Masonry( grid, {
+            itemSelector: '.note',
+            columnWidth: 200,
+            gutter: 10,
+        });
+    },
+
     render: function() {
         return (
-            <div className="notes-grid">
+            <div className="notes-grid" ref="grid">
                 {
                     this.props.notes.map(function(note){
                         return (
@@ -45,17 +55,17 @@ var NotesApp = React.createClass({
                 },
                 {
                     id: 2,
-                    text: "Задача №2",
+                    text: "Задача №2 adsfasdf asd dasf asdf dasfasdasdf dasf asdf ",
                     color: "green"
                 },
                 {
                     id: 3,
-                    text: "Задача №3",
+                    text: "Задача №3 dsafasdfasdf dasf asdf asdf asdfasdfasd sadf ",
                     color: "gray"
                 },
                 {
                     id: 4,
-                    text: "Задача №4",
+                    text: "Задача №4 sdafasdfasdf asdf asdf asdfasdfasd fasd fasdf asdf asdf asdf",
                     color: "red"
                 },
                 {
