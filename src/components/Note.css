@@ -1,0 +1,32 @@
+.note {
+    position: relative;
+    width: 400px;
+    height: auto;
+    background-color: yellow;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    border-radius: 2px;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: box-shadow .3s;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.note:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.delete-note {
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+    display: none;
+    color: rgba(0,0,0,0.6);
+    cursor: pointer;
+}
+
+.note:hover .delete-note{
+    display: block;
+}
