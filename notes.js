@@ -26,6 +26,7 @@ var NoteEditor = React.createClass({
         };
 
         this.props.onNoteAdd(newNote);
+        this.setState({ text: '' });
     },
 
     render: function() {
@@ -110,10 +111,17 @@ var NotesApp = React.createClass({
         };
     },
 
+    componentDidMount: function() {
+        var localNotes = JSON.parse(localStorage.getItem('notes'));
+        if (localNotes) {
+            this.setState({ notes: localNotes });
+        }
+    },
+
     handleNoteAdd: function(newNote) {
         var newNotes = this.state.notes.slice();
         newNotes.unshift(newNote);
-        this.setState({ notes: newNotes });
+        this.setState({ notes: newNotes },  this._updateLocalStorage);
     },
 
     render: function() {
@@ -125,6 +133,12 @@ var NotesApp = React.createClass({
             </div>
         );
     },
+
+    _updateLocalStorage: function() {
+        var notes = JSON.stringify(this.state.notes);
+        localStorage.setItem('notes', notes);
+    }
+
 });
 
 ReactDOM.render(
