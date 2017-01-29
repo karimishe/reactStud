@@ -30,7 +30,44 @@ var NotesGrid = React.createClass({
 var NotesApp = React.createClass({
     getInitialState: function() {
         return {
-            notes: []
+            notes: [
+                {
+                    id: 1,
+                    text: "Задача №1",
+                    color: "green"
+                },
+                {
+                    id: 2,
+                    text: "Задача №2",
+                    color: "green"
+                },
+                {
+                    id: 3,
+                    text: "Задача №3",
+                    color: "gray"
+                },
+                {
+                    id: 4,
+                    text: "Задача №4",
+                    color: "red"
+                },
+                {
+                    id: 5,
+                    text: "Задача №5",
+                    color: "red"
+                },
+                {
+                    id: 6,
+                    text: "Задача №6",
+                    color: "yellow"
+                },
+                {
+                    id: 7,
+                    text: "Задача №7",
+                    color: "cian"
+                }
+
+            ]
         };
     },
     render: function() {
