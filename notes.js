@@ -28,6 +28,11 @@ var NotesGrid = React.createClass({
 });
 
 var NotesApp = React.createClass({
+    getInitialState: function() {
+        return {
+            notes: []
+        };
+    },
     render: function() {
         return (
             <div>
