@@ -1,7 +1,7 @@
 var Note = React.createClass({
     render: function() {
         return (
-            <div className="note"> Note </div>
+            <div className="note">  {this.props.children} </div>
         );
     }
 });
@@ -18,10 +18,17 @@ var NotesGrid = React.createClass({
     render: function() {
         return (
             <div className="notes-grid">
-                NotesGrid
-                <Note />
-                <Note />
-                <Note />
+                {
+                    this.props.notes.map(function(note){
+                        return (
+                            <Note
+                                key={note.id}
+                                color={note.color}>
+                                    {note.text}
+                            </Note>
+                        );
+                    })
+                }
             </div>
         );
     }
@@ -75,7 +82,7 @@ var NotesApp = React.createClass({
             <div>
                 NotesApp
                 <NoteEditor/>
-                <NotesGrid/>
+                <NotesGrid notes={this.state.notes}/>
             </div>
         );
     },
