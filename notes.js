@@ -22,14 +22,17 @@ var NoteEditor = React.createClass({
     },
 
     handleNoteAdd: function() {
-        var newNote = {
-            text: this.state.text,
-            color: 'yellow',
-            id: Date.now()
-        };
+        if (this.state.text){
+            var newNote = {
+                text: this.state.text,
+                color: 'yellow',
+                id: Date.now()
+            };
 
-        this.props.onNoteAdd(newNote);
-        this.setState({ text: '' });
+
+            this.props.onNoteAdd(newNote);
+            this.setState({ text: '' });
+        }
     },
 
     render: function() {
