@@ -10,24 +10,24 @@ var Note = React.createClass({
 var NoteEditor = React.createClass({
     render: function() {
         return (  
-            <div className="note-editor">NoteEditor</div>
+            <div className="note-editor">
+                <textarea
+                    placeholder="Enter your note here..."
+                    rows={5}
+                    className="textarea"
+                />
+                <button className="add-button">Add</button>
+
+            </div>
         );
     }
 });
 
 var NotesGrid = React.createClass({
-    componentDidMount: function() {
-        var grid = this.refs.grid;
-        this.msnry = new Masonry( grid, {
-            itemSelector: '.note',
-            columnWidth: 200,
-            gutter: 10,
-        });
-    },
 
     render: function() {
         return (
-            <div className="notes-grid" ref="grid">
+            <div className="notes-grid" >
                 {
                     this.props.notes.map(function(note){
                         return (
